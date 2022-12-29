@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <!-- META DATA -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- CSS & JS -->
+    <style>
+        *,
+        *::after,
+        *::before{
+            padding: 0;
+            margin: 0;
+            line-height: 1.5;
+            font-size: 16px;
+            transition: 500ms;
+            /* ERROR-CONTROL
+            border: 1px solid red;
+            color: 1px solid red;
+            */
+        }
+        a{ color: #ffffff;}
+        body{
+            min-width: 100vw;
+            height: 100vh;
+        }
+        main{
+            width: 100%;
+            height: 100%;
+            display: flex;
+        }
+        main .partition{
+            width: 50vw;
+            height: 100%;
+
+            position: relative;
+            cursor: pointer;
+        } 
+        main>.partition:hover{  width: 95vw;} 
+        main:hover>:not(:hover){  width: 5vw;} 
+        main:hover>:not(:hover)>.content{  display: none;} 
+        main:hover>:not(:hover)>span{  display: none;} 
+        main>.container{
+            background: url('urban.jpg');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+        }
+        main>.wrapper{
+            background: url('eastern.jpg');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+        }
+        .partition>.overlay{
+            --overlay: linear-gradient(#001e208a,#0118158f,#090d1363);
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+
+            background: var(--overlay);
+            mix-blend-mode: overlay;
+        }
+        .partition>.content{
+            position: absolute;
+            z-index: 2;
+
+            width: 80%;
+            height: fit-content;
+            padding: 10px 15px;
+            border-radius: 10px;
+            background: linear-gradient(#f3f5a44d,#a9ec8f33,#a9f5eb25);
+            backdrop-filter: blur(0.1em);
+
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+
+            display: grid;
+            gap: 10px;
+        }
+        .partition:first-child>.content{
+            background: linear-gradient(#ffffff4b,#b6b6b65b,#5e5e5e5e);
+            backdrop-filter: blur(0.1em);
+        }
+        .partition>.content>h3{
+            width: 100%;
+            height: fit-content;
+            padding: 30px 0;
+
+            font-size: 1.5em;
+            font-weight: 300;
+            letter-spacing: 1px;
+            word-spacing: 1.5px;
+            line-height: 1.2;
+        }
+        .partition>.content>p{
+            width: 100%;
+            height: fit-content;
+            padding: 8px 5px;
+
+            font-size: 1.05em;
+        }
+        .partition>.content>a{
+            width: fit-content;
+            height: fit-content;
+            padding: 8px;
+
+            place-self: start;
+
+            text-decoration: none;
+            font-size: 1.1em;
+            letter-spacing: 0.8px;
+        }
+        .partition:last-child>.content>a{place-self: end;}
+        .partition>span{
+            position: absolute;
+            width: fit-content;
+            height: fit-content;
+            z-index: 2;
+
+            bottom: 20px;
+
+            display: grid;
+            gap: 10px;
+        }
+        .container>span{  left: 0px;}
+        .wrapper>span{ right: 5px;}
+        .partition>span>a{
+            display: flex;
+            gap: 5px;
+            justify-content: center;
+            padding: 2px 5px;
+            border: 2px solid;
+            filter: drop-shadow(0.5px 0.5px 1px #0D0D0D);
+            
+            text-decoration: none;
+        }
+        .partition:first-child>span>a{
+            color: #010122;
+            filter: unset;
+            background: #46e9ff85;
+            border: 2px solid #01012b9c;
+        }
+        .partition:last-child>span>a{
+            color: #ffff;
+            filter: unset;
+            background: #01012b6b;
+            border: 2px solid #ffffff7a;
+        }
+        /*.partition:first-child>span>a{
+            color: #0D0D0D;
+            filter: drop-shadow(0.35px 0.35px 0.7px #FFF);
+        }
+        .partition:last-child>span>a{
+            filter: drop-shadow(0.35px 0.35px 0.7px #0D0D0D);
+        }*/
+        .wrapper>span>a{ flex-direction: row-reverse;}
+        span>a>i{
+            all: unset;
+
+            min-width: 30px;
+            min-height: 30px;
+            padding: 3px;
+
+            display: grid;
+            place-items: center;
+
+            font-size: 1.15em;
+        }
+        span>a>button{
+            all: unset;
+
+            width: fit-content;
+            padding: 3px 0;
+
+            display: grid;
+            place-items: center;
+
+            font-size: 1.1em;
+            font-weight: 500;
+            filter: drop-shadow(0.5px 0.5px 1px #0D0D0D);
+        }
+        @media screen and (800px <= width <=700px){
+            *{transition: 600ms;}
+        }
+        @media screen and (max-width: 700px){
+            .partition>span{ 
+                grid-template-columns: 1fr 1fr;
+                left: 50%;
+                bottom: 10%;
+                transform: translate(-50%,-10%);
+            }
+            main>.partition:hover{  width: 85vw;} 
+            main:hover>:not(:hover){  width: 15vw;} 
+        }
+        @media screen and (max-width: 600px){
+            main{ flex-direction: column;}
+            main .partition{
+                width: 100%;
+                height: 50vh;
+            } 
+            main>.partition:hover{
+                width: 100vw;  
+                height: 85vh;
+            } 
+            main:hover>:not(:hover){ 
+                width: 100vw;  
+                height: 15vh;
+            } 
+            .partition>.content{ transition: 300ms;}
+            .partition>.content>h3{
+                width: 100%;
+                height: fit-content;
+                padding: 20px 0 10px;
+            }
+            .partition>.content>p{
+                display: -webkit-box;
+                -webkit-line-clamp: 2; 
+                overflow: hidden;
+                -webkit-box-orient: vertical;
+                line-height: 1.6;
+            }
+            main:hover>.partition>.content>p{ 
+                -webkit-line-clamp: unset; 
+                line-height: 1.5;
+            }
+            .partition>.content>a{ padding: 5px;}
+            .partition:first-child>.content>a{place-self: end;}
+            .partition>span{ 
+                display: none;
+                grid-template-columns: 1fr 1fr;
+                left: 50%;
+                bottom: 1%;
+                transform: translate(-50%,-1%);
+            }
+            main:hover>.partition>span{ display: grid;}
+            main:hover>.partition:not(:hover)>span{ display: none;}
+        }
+    </style>
+    <!-- HEADER DATA -->
+    <title>Antonio's safari</title>
+</head>
+<body>
+    <main>
+        <div class="partition container">
+            <div class="overlay"></div>
+            <div class="content">
+                <h3>Visit Nairobi</h3>
+                <p>
+                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ea numquam exercitationem aperiam labore, vero eveniet necessitatibus commodi porro! Voluptatem, fugiat?
+                </p>
+                <a href="#">Learn More</a>
+            </div>
+            <span class="links">
+                <a href="#">
+                    <i>&phone;</i>
+                    <button>Link-1</button>
+                </a>
+                <a href="#">
+                    <i>&phone;</i>
+                    <button>Link-2</button>
+                </a>
+            </span>
+        </div>
+        <div class="partition wrapper">
+            <div class="overlay"></div>
+            <div class="content">
+                <h3>Go On A Drive</h3>
+                <p>
+                    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ea numquam exercitationem aperiam labore, vero eveniet necessitatibus commodi porro! Voluptatem, fugiat?
+                </p>
+                <a href="#">Learn More</a>
+            </div>
+            <span class="links">
+                <a href="#">
+                    <i>&phone;</i>
+                    <button>Link-A</button>
+                </a>
+                <a href="#">
+                    <i>&phone;</i>
+                    <button>Link-B</button>
+                </a>
+            </span>
+        </div>
+    </main> 
+</body>
+</html>
